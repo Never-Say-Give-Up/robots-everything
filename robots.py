@@ -2,10 +2,12 @@
 # coding: utf-8
 
 # In[14]:
+import re
 
 try:
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
+    from bs4 import BeautifulSoup
     import requests
 except:
     print("库不完善，请检查依赖安装情况：")
@@ -33,10 +35,10 @@ def initChrome():
 
 #requests库
 
-## gethtml 函数
+## getHtml 函数
 ## 获取网页源代码
 ## 返回值: (字符串)html源码
-def gethtml(url):
+def getHtml(url):
     r = requests.request("GET",url)
     if (r.status_code != 200):
         print("网络连接错误！")
@@ -44,19 +46,18 @@ def gethtml(url):
     r.encoding = r.apparent_encoding
     return r.text
 
-## get_title 函数
+## getTitle 函数
 ## 获取页面标题
 ## 返回值: (字符串)html标题
-def get_title(text):
-    title = re.search('<title>(.+)</title>',text).group()
-    title = title.replace("<title>","").replace("</title>","").replace(" ","")
-    return title
+def getTitle(text):
+    soup = BeautifulSoup(text, features="lxml")
+    return soup.title.string
 
-## get_resource 函数
+## getResource 函数
 ## 获取网页源代码中包含的特定扩展名资源链接
 ## 返回值: [列表](字符串)资源链接*N
-def get_resource(text,types):
-    return re.findall(r'http://[\S]*' + types,text1)
+def getResource(text,types):
+    return re.findall(r'http://[\S]*' + types,text)
 
 ## download 函数
 ## 下载数据到本地
