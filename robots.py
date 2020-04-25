@@ -50,8 +50,9 @@ def getHtml(url):
 ## 获取页面标题
 ## 返回值: (字符串)html标题
 def getTitle(text):
-    soup = BeautifulSoup(text, features="lxml")
-    return soup.title.string
+    title = re.search('<title>(.+)</title>',text).group()
+    title = title.replace("<title>","").replace("</title>","").replace(" ","")
+    return title
 
 ## getResource 函数
 ## 获取网页源代码中包含的特定扩展名资源链接
