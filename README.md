@@ -9,4 +9,7 @@
 3. bs4 (BeautifulSoup)
 4. ....
 
+### 这是一个十分简单的食用方法：
+将robots-everything项目放在你的代码所在文件夹中，在代码的头部加入：“import robots”，尽情享受极简的乐趣吧！
+
 ### 2020-4-24 启航雏形版Beta 发布！！
